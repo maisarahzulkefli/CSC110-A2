@@ -34,6 +34,7 @@ def num_sections(course: tuple[str, str, set]) -> int:
     Preconditions:
         - The input matches the format for a course described by the assignment handout.
     """
+    return len(course[2])
 
 
 def num_lecture_hours(section: tuple[str, str, tuple]) -> int:
@@ -44,6 +45,7 @@ def num_lecture_hours(section: tuple[str, str, tuple]) -> int:
 
     Hint: you can use ".hour" to access the hour attribute of a datetime.time value.
     """
+    return sum([time[2].hour - time[1].hour for time in section[2]])
 
 
 def sections_in_semester(schedule: dict[str, tuple[str, str, tuple]], semester: str) \
@@ -56,6 +58,7 @@ def sections_in_semester(schedule: dict[str, tuple[str, str, tuple]], semester: 
         - The input matches the format for a schedule described by the assignment handout.
         - semester in {'F', 'S'}
     """
+    return {schedule[course] for course in schedule if schedule[course][1] in [semester, 'Y']}
 
 
 ###################################################################################################
@@ -71,6 +74,15 @@ def times_conflict(m1: tuple[str, datetime.time, datetime.time],
     Preconditions:
         - m1 and m2 match the format for a meeting described by the assignment handout.
     """
+    # m1_range = {x for x in range(m1[1].hour, m1[2].hour)}
+    # m2_range = {y for y in range(m2[1].hour, m2[2].hour)}
+
+    # return m1[0] == m2[0] and any([x == y for x in m1_range for y in m2_range])
+    # return set.intersection(m1_range, m2_range) != set()
+    m2_longer = m1[2] > m2[1] and m2[2] > m1[1]
+    m1_longer = m2[2] > m1[1] and m1[2] > m2[1]
+    #
+    return m1[0] == m2[0] and (m1_longer or m2_longer)
 
 
 def sections_conflict(s1: tuple[str, str, tuple], s2: tuple[str, str, tuple]) \
@@ -84,6 +96,14 @@ def sections_conflict(s1: tuple[str, str, tuple], s2: tuple[str, str, tuple]) \
         - s1 and s2 match the format for a section described by the assignment handout.
     """
 
+    same_semester = s1[1] == s2[1] or (s1[1] in {'Y'} or s2[1] in {'Y'})
+
+    conflicting_time = any([times_conflict(x, y) for x in s1[-1] for y in s2[-1]])
+
+    # print([times_conflict(x, y) for x in s1[-1] for y in s2[-1]])
+
+    return same_semester and conflicting_time
+
 
 def is_valid(schedule: dict[str, tuple[str, str, tuple]]) -> bool:
     """Return whether the given schedule is valid.
@@ -94,6 +114,15 @@ def is_valid(schedule: dict[str, tuple[str, str, tuple]]) -> bool:
     Preconditions:
         - schedule matches the format for a schedule described by the assignment handout.
     """
+
+    # Gives all the values of the dictionary
+    sc_sections = [schedule[key] for key in schedule]
+
+    # print(sc_sections)
+
+    # print([not sections_conflict(x, y) for x in sc_sections for y in sc_sections if x != y])
+
+    return all([not sections_conflict(x, y) for x in sc_sections for y in sc_sections if x != y])
 
 
 def possible_schedules(c1: tuple[str, str, set], c2: tuple[str, str, set]) \
@@ -112,6 +141,12 @@ def possible_schedules(c1: tuple[str, str, set], c2: tuple[str, str, set]) \
         - c1 and c2 match the format for a course described by the assignment handout.
         - c1 != c2
     """
+    all_possible_combs = [{c1[0]: s1, c2[0]: s2} for s1 in c1[2] for s2 in c2[2]]
+
+    # For debugging
+    return all_possible_combs
+
+    # return [schedule for schedule in all_possible_combs if is_valid(schedule)]
 
 
 def valid_schedules(c1: tuple[str, str, set],
@@ -132,6 +167,7 @@ def valid_schedules(c1: tuple[str, str, set],
         - c1 and c2 match the format for a course described by the assignment handout.
         - c1 != c2
     """
+    return [schedule for schedule in possible_schedules(c1, c2) if is_valid(schedule)]
 
 
 def possible_five_course_schedules(c1: tuple[str, str, set],
@@ -157,6 +193,15 @@ def possible_five_course_schedules(c1: tuple[str, str, set],
     "for ... in ..." across multiple lines to help make your code more readable.
     """
 
+    all_possible_combs = [{c1[0]: s1, c2[0]: s2, c3[0]: s3, c4[0]: s4, c5[0]: s5}
+                          for s1 in c1[2]
+                          for s2 in c2[2]
+                          for s3 in c3[2]
+                          for s4 in c4[2]
+                          for s5 in c5[2]]
+
+    return all_possible_combs
+
 
 def valid_five_course_schedules(c1: tuple[str, str, set],
                                 c2: tuple[str, str, set],
@@ -178,6 +223,8 @@ def valid_five_course_schedules(c1: tuple[str, str, set],
         - c3 != c4 and c3 != c5
         - c4 != c5
     """
+    return [schedule for schedule in possible_five_course_schedules(c1, c2, c3, c4, c5)
+            if is_valid(schedule)]
 
 
 ###################################################################################################
@@ -196,6 +243,11 @@ def is_section_compatible(schedule: dict[str, tuple[str, str, tuple]],
         - section matches the format for a section described by the assignment handout.
         - schedule matches the format for a schedule described by the assignment handout.
     """
+    all_sections = [schedule[course] for course in schedule]
+
+    # print([not sections_conflict(s, section) for s in all_sections])
+
+    return all([not sections_conflict(s, section) for s in all_sections])
 
 
 def is_course_compatible(schedule: dict[str, tuple[str, str, tuple]],
@@ -211,6 +263,7 @@ def is_course_compatible(schedule: dict[str, tuple[str, str, tuple]],
         - schedule matches the format for a schedule described by the assignment handout.
         - course[0] not in schedule
     """
+    return any([is_section_compatible(schedule, s) for s in course[2]])
 
 
 def compatible_sections(schedule: dict[str, tuple[str, str, tuple]],
@@ -226,6 +279,9 @@ def compatible_sections(schedule: dict[str, tuple[str, str, tuple]],
         - schedule matches the format for a schedule described by the assignment handout.
         - course[0] not in schedule
     """
+    # print({section for section in course[2] if is_section_compatible(schedule, section)})
+
+    return {section for section in course[2] if is_section_compatible(schedule, section)}
 
 
 if __name__ == '__main__':

@@ -88,25 +88,121 @@ def mystery_3c(c1: float, c2: float, c3: float) -> int:
 def test_mystery_3a_1() -> None:
     """Test mystery_3a for an expected return value of 1."""
     expected = 1
-    actual = mystery_3a(..., ..., ...)  # TODO: fill in the arguments, then delete this TODO
+    actual = mystery_3a('x', 'x', 'x')
+    assert actual == expected
+
+
+def test_mystery_3a_2() -> None:
+    """Test mystery_3a for an expected return value of 2."""
+    expected = 2
+    actual = mystery_3a('x', 'x', 'y')
+    assert actual == expected
+
+
+def test_mystery_3a_3() -> None:
+    """Test mystery_3a for an expected return value of 3."""
+    expected = 3
+    actual = mystery_3a('x', 'y', 'y')
+    assert actual == expected
+
+
+def test_mystery_3a_4() -> None:
+    """Test mystery_3a for an expected return value of 4."""
+    expected = 4
+    actual = mystery_3a('x', 'y', 'x')
+    assert actual == expected
+
+
+def test_mystery_3a_5() -> None:
+    """Test mystery_3a for an expected return value of 5."""
+    expected = 5
+    actual = mystery_3a('x', 'y', 'z')
     assert actual == expected
 
 
 def test_mystery_3b_1() -> None:
     """Test mystery_3b for an expected return value of 1."""
     expected = 1
-    actual = mystery_3b(..., ..., ...)  # TODO: fill in the arguments, then delete this TODO
+    actual = mystery_3b(3, 2, 1)
+    assert actual == expected
+
+
+def test_mystery_3b_2() -> None:
+    """Test mystery_3b for an expected return value of 2."""
+    expected = 2
+    actual = mystery_3b(3, 2, 3)
+    assert actual == expected
+
+
+def test_mystery_3b_3() -> None:
+    """Test mystery_3b for an expected return value of 3."""
+    expected = 3
+    actual = mystery_3b(1, 2, 3)
+    assert actual == expected
+
+
+def test_mystery_3b_4() -> None:
+    """Test mystery_3b for an expected return value of 4."""
+    expected = 4
+    actual = mystery_3b(1, 3, 2)
     assert actual == expected
 
 
 def test_mystery_3c_1() -> None:
     """Test mystery_3c for an expected return value of 1."""
     expected = 1
-    actual = mystery_3c(..., ..., ...)  # TODO: fill in the arguments, then delete this TODO
+    actual = mystery_3c(1.0, 3.0, 6.0)
     assert actual == expected
 
 
-# TODO: add more tests as necessary
+def test_mystery_3c_2() -> None:
+    """Test mystery_3c for an expected return value of 2."""
+    expected = 2
+    actual = mystery_3c(1.0, 3.0, 8.0)
+    assert actual == expected
+
+
+def test_mystery_3c_3() -> None:
+    """Test mystery_3c for an expected return value of 3."""
+    expected = 3
+    actual = mystery_3c(1.0, 4.0, 8.0)
+    assert actual == expected
+
+
+def test_mystery_3c_4() -> None:
+    """Test mystery_3c for an expected return value of 4."""
+    expected = 4
+    actual = mystery_3c(1.0, 4.0, 9.0)
+    assert actual == expected
+
+
+def test_mystery_3c_5() -> None:
+    """Test mystery_3c for an expected return value of 5."""
+    expected = 5
+    actual = mystery_3c(-1.0, -2.0, 0.0)
+    assert actual == expected
+
+
+def test_mystery_3c_6() -> None:
+    """Test mystery_3c for an expected return value of 6."""
+    expected = 6
+    actual = mystery_3c(-1.0, 2.0, 3.0)
+    assert actual == expected
+
+
+def test_mystery_3c_7() -> None:
+    """Test mystery_3c for an expected return value of 7."""
+    expected = 7
+    actual = mystery_3c(-1.0, 2.0, -3.0)
+    assert actual == expected
+
+
+def test_mystery_3c_8() -> None:
+    """Test mystery_3c for an expected return value of 8."""
+    expected = 8
+    actual = mystery_3c(0.0, 0.0, 0.0)
+    assert actual == expected
+
 
 if __name__ == '__main__':
     import python_ta
