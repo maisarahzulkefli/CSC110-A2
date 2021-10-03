@@ -89,6 +89,7 @@ SCHEDULE_2 = {
     'CON333': CON333_LEC1337
 }
 
+# Actually conflicting, because CSC111 0301 and CON123 0321
 SCHEDULE_3 = {
     'CSC110': CSC110_LEC0101,
     'CSC111': CSC111_LEC0301,
@@ -101,6 +102,11 @@ SCHEDULE_4 = {
     'CSC110': CSC110_LEC0101,
     'CSC111': CSC111_LEC0301,
     'CON123': CON123_LEC0123
+}
+
+SCHEDULE_5 = {
+    'CSC110': CSC110_LEC0101,
+    'MAT137': MAT137_LEC0201
 }
 
 ###################################################################################################
@@ -131,7 +137,14 @@ def test_num_lecture_hours() -> None:
     assert a2_courses.num_lecture_hours(MAT137_LEC0101) == 6
 
 
-# TODO: Create more tests
+def test_sections_in_semester() -> None:
+    """
+    Test sections_in_semester on SCHEDULE_4 defined above
+    Which only has CSC110_LEC0101 and CON123_LEC0123
+    """
+
+    assert a2_courses.sections_in_semester(SCHEDULE_4, 'F') == {CSC110_LEC0101, CON123_LEC0123}
+
 
 ###################################################################################################
 # Part 3 Question 2
@@ -151,14 +164,23 @@ def test_times_no_conflict() -> None:
     """
     Test times_conflict with non-conflicting meetings times
     """
-    # TODO: Create a test
+    m1 = TUE_9_TO_11
+    m2 = WED_12_TO_1
+    expected = False
+    actual = a2_courses.times_conflict(m1, m2)
+    assert actual == expected
 
 
 def test_sections_conflict() -> None:
     """
     Test sections_conflict with conflicting sections
     """
-    # TODO: Create a test
+    s1 = MAT137_LEC0101
+    s2 = CSC110_LEC0101
+
+    expected = True
+    actual = a2_courses.sections_conflict(s1, s2)
+    assert actual == expected
 
 
 def test_sections_no_conflict() -> None:
@@ -176,14 +198,27 @@ def test_is_valid() -> None:
     """
     Test is_valid with valid schedule
     """
-    # TODO: Create a test
+    expected = True
+    actual = a2_courses.is_valid(SCHEDULE_1)
+
+    assert actual == expected
 
 
 def test_not_valid() -> None:
     """
     Test is_valid with invalid schedule
     """
-    # TODO: Create a test
+    # Invalid schedule, CSC110_LEC0101 and MAT137_LEC0101 is conflicting session.
+    schedule_5 = {
+        'CSC110': CSC110_LEC0101,
+        'MAT137': MAT137_LEC0101,
+        'CON123': CON123_LEC0123
+    }
+
+    expected = False
+    actual = a2_courses.is_valid(schedule_5)
+
+    assert expected == actual
 
 
 def test_2_possible_schedule_combinations() -> None:
@@ -192,6 +227,8 @@ def test_2_possible_schedule_combinations() -> None:
     """
     c1 = MAT137
     c2 = CSC111
+
+    # Should be 1?
     expected = 2
     actual = a2_courses.possible_schedules(c1, c2)
     assert len(actual) == expected
@@ -201,7 +238,13 @@ def test_4_possible_schedule_combinations() -> None:
     """
     Test possible_schedule_combinations with 4 possible combinations
     """
-    # TODO: Create a test
+    c1 = CON333
+    c2 = CON123
+
+    expected = 4
+    actual = a2_courses.possible_schedules(c1, c2)
+
+    assert len(actual) == expected
 
 
 def test_1_valid_schedule_combinations() -> None:
@@ -219,7 +262,12 @@ def test_4_valid_schedule_combinations() -> None:
     """
     Test valid_schedule_combinations with 4 valid schedule combinations
     """
-    # TODO: Create a test
+    c1 = CON333
+    c2 = CON123
+
+    expected = 4
+    actual = a2_courses.valid_schedules(c1, c2)
+    assert len(actual) == expected
 
 
 def test_possible_five_course_schedules() -> None:
@@ -240,10 +288,17 @@ def test_invalid_five_course_schedules() -> None:
     """
     Test valid_five_course_schedules with invalid five course schedule
     """
-    # TODO: Create a test
+    schedule_6 = {
+        'CSC110': CSC110_LEC0101,
+        'MAT137': MAT137_LEC0101,
+        'CON123': CON123_LEC0123,
+        'CON333': CON333_LEC1337,
+        'CSC111': CSC111_LEC0301
+    }
 
+    expected = []
+    actual = a2_courses.valid_five_course_schedules(CSC110, MAT137, CON123, CON333, CSC111)
 
-# TODO: Create more tests
 
 ###################################################################################################
 # Part 3 Question 3
@@ -252,28 +307,40 @@ def test_section_compatible() -> None:
     """
     Test is_section_compatible with compatible sections
     """
-    # TODO: Create a test
+    expected = True
+    actual = a2_courses.is_section_compatible(SCHEDULE_1, STA130_LEC0101)
+
+    assert expected == actual
 
 
 def test_section_not_compatible() -> None:
     """
     Test is_section_compatible with incompatible sections
     """
-    # TODO: Create a test
+    expected = False
+    actual = a2_courses.is_section_compatible(SCHEDULE_1, MAT137_LEC0101)
+
+    assert expected == actual
 
 
 def test_course_compatible() -> None:
     """
     Test is_course_compatible with compatible course
     """
-    # TODO: Create a test
+    expected = True
+    actual = a2_courses.is_course_compatible(SCHEDULE_1, MAT137)
+
+    assert expected == actual
 
 
 def test_course_not_compatible() -> None:
     """
     Test is_course_compatible with incompatible course
     """
-    # TODO: Create a test
+    expected = False
+    actual = a2_courses.is_course_compatible(SCHEDULE_1, CON333)
+
+    assert expected == actual
 
 
 def test_compatible_sections() -> None:
@@ -284,8 +351,6 @@ def test_compatible_sections() -> None:
     expected = True
     assert actual == expected
 
-
-# TODO: Create more tests
 
 ###################################################################################################
 # Part 4
