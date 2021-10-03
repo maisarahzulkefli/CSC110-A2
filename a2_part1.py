@@ -47,7 +47,7 @@ def statement3(my_set: set[int],
         - my_p can be called on every element from my_set
         - my_q can be called on every element from my_set
     """
-
+    
     return all([my_p(x) and my_q(x) for x in my_set])
 
 
@@ -56,7 +56,7 @@ def statement4(my_set: set[int],
                my_q: Callable[[int], bool]) -> bool:
     """Implementation of Statement 4 from Part 1, Question 2.
     """
-
+    
     return all([not my_p(x) or my_q(x) for x in my_set])
 
 
@@ -86,8 +86,9 @@ def example_q(x: int) -> bool:
 
 if __name__ == '__main__':
     import pytest
+    
     pytest.main(['a2_part1.py', '-v'])
-
+    
     # When you are ready to check your work with python_ta, uncomment the following lines.
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
