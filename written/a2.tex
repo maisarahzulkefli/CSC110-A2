@@ -4,7 +4,7 @@
 \usepackage[margin=0.75in]{geometry}
 
 \title{CSC110 Fall 2021 Assignment 2: Logic, Constraints, and Nested Data}
-\author{Hung, Shou-Yi (Ray)}
+\author{Hung, Shou-Yi (Ray), Scott Cui}
 \date{\today}
 
 \begin{document}
@@ -14,31 +14,31 @@
 
 \begin{enumerate}
 
-\item[1.]
-    \begin{enumerate}
-        \item[1.] If $D_1$ is the set of all Natural Numbers, then it's possible to only satisfy one statement. In this case, statement 1 will be satisfied, but statement 2 will not. Because for every number you pick in the Natural Numbers set, you can always find a number that is greater than it just by adding 1. But for the number 1 (or 0 depending on how you start the Natural Numbers), you cannot find a number that is smaller than it (Statement 2). 
-        \item[2.] If $D_2$ is the set of all Integers, including negatives, then it's possible to satisfy both. In this case, statement 1 will be satisfied because you can always find a number (y) greater than any number (x) you pick from the set. You can also always find a number (x) that is smaller than any number (y) you pick from the set. 
-        \item[3.] If $D_3$ is a set with only 1 element, then it's possible to falsify both statements. Pick $D_3 = {1}$, then for statement 1 and 2, we cannot find a y or x that is greater than or lesser than it. So both statements automatically becomes false. 
-    \end{enumerate}
+    \item[1.]
+        \begin{enumerate}
+            \item[1.] If $D_1$ is the set of all Natural Numbers, then it's possible to only satisfy one statement. In this case, statement 1 will be satisfied, but statement 2 will not. Because for every number you pick in the Natural Numbers set, you can always find a number that is greater than it just by adding 1. But for the number 1 (or 0 depending on how you start the Natural Numbers), you cannot find a number that is smaller than it (Statement 2).
+            \item[2.] If $D_2$ is the set of all Integers, including negatives, then it's possible to satisfy both. In this case, statement 1 will be satisfied because you can always find a number (y) greater than any number (x) you pick from the set. You can also always find a number (x) that is smaller than any number (y) you pick from the set.
+            \item[3.] If $D_3$ is a set with only 1 element, then it's possible to falsify both statements. Pick $D_3 = {1}$, then for statement 1 and 2, we cannot find a y or x that is greater than or lesser than it. So both statements automatically becomes false.
+        \end{enumerate}
 
-\item[2.]
-    \begin{enumerate}
-        \item[1.] $P(x): |x| >= 10$
-        \item[2.] $Q(x): |x| >= 5$
-    \end{enumerate}
-   For Statement 3, $\forall x \in S$, condition P is always not satisfied and condition Q will only sometimes be satisfied. Which makes it false. 
-   
-   However, for Statement 4, $\forall x \in S$, condition P will still not be satisfied always, but since this is an implication statement, if the hypothesis is false, then the whole implication statement will be true regardless of what $Q(x)$ is . 
-   
-   Therefore, in the two predicates I've listed, one of the statements will be true and the other will be false. 
+    \item[2.]
+        \begin{enumerate}
+            \item[1.] $P(x): |x| >= 10$
+            \item[2.] $Q(x): |x| >= 5$
+        \end{enumerate}
+        For Statement 3, $\forall x \in S$, condition P is always not satisfied and condition Q will only sometimes be satisfied. Which makes it false.
 
-\item[3.]
-Complete this part in the provided \texttt{a2\_part1.py} starter file.
-Do \textbf{not} include your solution in this file.
+        However, for Statement 4, $\forall x \in S$, condition P will still not be satisfied always, but since this is an implication statement, if the hypothesis is false, then the whole implication statement will be true regardless of what $Q(x)$ is .
 
-\item[4.]
-Complete this part in the provided \texttt{a2\_part1.py} starter file.
-Do \textbf{not} include your solution in this file.
+        Therefore, in the two predicates I've listed, one of the statements will be true and the other will be false.
+
+    \item[3.]
+        Complete this part in the provided \texttt{a2\_part1.py} starter file.
+        Do \textbf{not} include your solution in this file.
+
+    \item[4.]
+        Complete this part in the provided \texttt{a2\_part1.py} starter file.
+        Do \textbf{not} include your solution in this file.
 
 \end{enumerate}
 
@@ -53,121 +53,121 @@ Do \textbf{not} include your solution in this file.
 
 \begin{enumerate}
 
-\item[1.]
-Complete this part in the provided \texttt{a2\_part3.py} starter file.
-Do \textbf{not} include your solution in this file.
+    \item[1.]
+        Complete this part in the provided \texttt{a2\_part3.py} starter file.
+        Do \textbf{not} include your solution in this file.
 
-\item[2.]
+    \item[2.]
 
-\begin{enumerate}
-\item[(a)]
+        \begin{enumerate}
+            \item[(a)]
 
-\emph{IMPORTANT DEFINITIONS/NOTATION} (don't change this text!)
+                \emph{IMPORTANT DEFINITIONS/NOTATION} (don't change this text!)
 
-We define the following sets:
+                We define the following sets:
 
-\begin{itemize}
-\item $C$: the set of all possible courses
-\item $S$: the set of all possible sections
-\item $M$: the set of all possible meeting times
-\item $SC$: the set of all possible schedules
-\end{itemize}
+                \begin{itemize}
+                    \item $C$: the set of all possible courses
+                    \item $S$: the set of all possible sections
+                    \item $M$: the set of all possible meeting times
+                    \item $SC$: the set of all possible schedules
+                \end{itemize}
 
-We also define the following notation for expressions involving the elements of these sets:
+                We also define the following notation for expressions involving the elements of these sets:
 
-\begin{itemize}
-\item
-The first three (courses/sections/meeting times) are represented as tuples (as described in the assignment handout), and you can use the indexing operation on these values. For example, you could translate ``every section term is in $\{'F', 'S', 'Y'\}$'' into predicate logic as the statement:
+                \begin{itemize}
+                    \item
+                          The first three (courses/sections/meeting times) are represented as tuples (as described in the assignment handout), and you can use the indexing operation on these values. For example, you could translate ``every section term is in $\{'F', 'S', 'Y'\}$'' into predicate logic as the statement:
 
-    \[\forall s \in S,~ s[1] \in \{'F', 'S', 'Y' \} \]
+                          \[\forall s \in S,~ s[1] \in \{'F', 'S', 'Y' \} \]
 
-\item
-The start and end times of a meeting time can be compared chronologically using the standard $<$, $\leq$, $>$, and $\geq$ operators.
+                    \item
+                          The start and end times of a meeting time can be compared chronologically using the standard $<$, $\leq$, $>$, and $\geq$ operators.
 
-\item
-For a section $s \in S$, $s[2]$ represents a tuple of meeting times.
-You may use standard set operations and quantifiers for these tuples (pretend they are sets).
-For example, we can say:
+                    \item
+                          For a section $s \in S$, $s[2]$ represents a tuple of meeting times.
+                          You may use standard set operations and quantifiers for these tuples (pretend they are sets).
+                          For example, we can say:
 
-    \begin{itemize}
-    \item $\forall s \in S,~ s[2] \subseteq M$
-    \item $\forall s \in S,~ \forall m \in s[2],~ m[1] < m[2]$
-    \end{itemize}
+                          \begin{itemize}
+                              \item $\forall s \in S,~ s[2] \subseteq M$
+                              \item $\forall s \in S,~ \forall m \in s[2],~ m[1] < m[2]$
+                          \end{itemize}
 
-\item
-Finally, for a schedule $sc \in SC$, you can use the notation $sc.sections$ to refer to a set of all sections in that schedule.
-You can use quantifiers with that set of schedules as well, e.g.
-$\forall s \in sc.sections,~ ...$
-\end{itemize}
+                    \item
+                          Finally, for a schedule $sc \in SC$, you can use the notation $sc.sections$ to refer to a set of all sections in that schedule.
+                          You can use quantifiers with that set of schedules as well, e.g.
+                          $\forall s \in sc.sections,~ ...$
+                \end{itemize}
 
-\textbf{Predicate for meeting times conflicting:}
-
-
-\begin{align*}
-MeetingTimesConflict(m_1, m_2) : (m_1[0] = m_2[0]) \land&\\
-((m_1[2] > m_2[1] \land m_2[2] > m_1[1]) \lor (m_2[2] > m_1[1] \land m_1[2] > m_2[1]))&,\\
-\text{where $m_1, m_2 \in M$}&
-\end{align*}
-
-\smallskip
-
-\textbf{Predicate for sections conflicting:}
+                \textbf{Predicate for meeting times conflicting:}
 
 
-\begin{align*}
-SectionsConflict(s_1, s_2) : (s_1[1] = s_2[1] \lor (s_1[1] \in \{'Y'\} \lor s_2[2] \in \{'Y'\})) \land (\exists x \in s_1[2], \exists y \in s_2[2],&\\
-MeetingTimesConflict(x, y)),&\\
-\text{where $s_1, s_2 \in S$}&
-\end{align*}
+                \begin{align*}
+                    MeetingTimesConflict(m_1, m_2) : (m_1[0] = m_2[0]) \land                               &   \\
+                    ((m_1[2] > m_2[1] \land m_2[2] > m_1[1]) \lor (m_2[2] > m_1[1] \land m_1[2] > m_2[1])) & , \\
+                    \text{where $m_1, m_2 \in M$}                                                          &
+                \end{align*}
 
-\smallskip
+                \smallskip
 
-\textbf{Predicate for valid schedule:}
-
-
-\begin{align*}
-IsValidSchedule(sc) : \forall x \in sc.sections, \forall y \in sc.sections : x \neq y, \neg SectionsConflict(x, y),&\\
-\text{where $sc \in SC$}&
-\end{align*}
+                \textbf{Predicate for sections conflicting:}
 
 
-\item[(b)]
-Complete this part in the provided \texttt{a2\_part3.py} starter file.
-Do \textbf{not} include your solution in this file.
-\end{enumerate}
+                \begin{align*}
+                    SectionsConflict(s_1, s_2) : (s_1[1] = s_2[1] \lor (s_1[1] \in \{'Y'\} \lor s_2[2] \in \{'Y'\})) \land (\exists x \in s_1[2], \exists y \in s_2[2], & \\
+                    MeetingTimesConflict(x, y)),                                                                                                                        & \\
+                    \text{where $s_1, s_2 \in S$}                                                                                                                       &
+                \end{align*}
 
-\item[3.]
+                \smallskip
 
-\begin{enumerate}
-\item[(a)]
-
-You may use all notation from question 2(a).
-Note that a course $c \in C$ is a tuple, and $c[2]$ is a set of sections, and so can be quantified over: $\forall s \in c[2], ...$.
-
-\smallskip
-
-\textbf{Predicate for section-schedule compatibility:}
+                \textbf{Predicate for valid schedule:}
 
 
-\begin{align*}
-IsCompatibleSection(sc, s) : \forall x \in sc.sections, \neg SectionsConflict(x, s)&\\
-\text{where $sc \in SC, s \in S$}
-\end{align*}
-
-\smallskip
-
-\textbf{Predicate for course-schedule compatibility:}
+                \begin{align*}
+                    IsValidSchedule(sc) : \forall x \in sc.sections, \forall y \in sc.sections : x \neq y, \neg SectionsConflict(x, y), & \\
+                    \text{where $sc \in SC$}                                                                                            &
+                \end{align*}
 
 
-\begin{align*}
-IsCompatibleCourse(sc, c) : \exists x \in c[2], IsCompatibleSection(sc, x)&\\
-\text{where $sc \in SC, c \in C$}
-\end{align*}
+            \item[(b)]
+                Complete this part in the provided \texttt{a2\_part3.py} starter file.
+                Do \textbf{not} include your solution in this file.
+        \end{enumerate}
 
-\item[(b)]
-Complete this part in the provided \texttt{a2\_part3.py} starter file.
-Do \textbf{not} include your solution in this file.
-\end{enumerate}
+    \item[3.]
+
+        \begin{enumerate}
+            \item[(a)]
+
+                You may use all notation from question 2(a).
+                Note that a course $c \in C$ is a tuple, and $c[2]$ is a set of sections, and so can be quantified over: $\forall s \in c[2], ...$.
+
+                \smallskip
+
+                \textbf{Predicate for section-schedule compatibility:}
+
+
+                \begin{align*}
+                    IsCompatibleSection(sc, s) : \forall x \in sc.sections, \neg SectionsConflict(x, s) & \\
+                    \text{where $sc \in SC, s \in S$}
+                \end{align*}
+
+                \smallskip
+
+                \textbf{Predicate for course-schedule compatibility:}
+
+
+                \begin{align*}
+                    IsCompatibleCourse(sc, c) : \exists x \in c[2], IsCompatibleSection(sc, x) & \\
+                    \text{where $sc \in SC, c \in C$}
+                \end{align*}
+
+            \item[(b)]
+                Complete this part in the provided \texttt{a2\_part3.py} starter file.
+                Do \textbf{not} include your solution in this file.
+        \end{enumerate}
 
 \end{enumerate}
 
