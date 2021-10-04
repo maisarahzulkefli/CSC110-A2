@@ -83,7 +83,7 @@ def example_q(x: int) -> bool:
 
 
 if __name__ == '__main__':
-  e  import pytest
+    import pytest
 
     pytest.main(['a2_part1.py', '-v'])
 
