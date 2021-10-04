@@ -153,8 +153,8 @@ def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, s
       - term in {'F', 'S'}
     """
 
-    same_sem_sections = set([section for section in course[2] if section[1] in {term, 'Y'}])
-    return course[0], course[1], same_sem_sections
+    new_sections = {section for section in course[2] if section[1] in {'Y', term}}
+    return course[0], course[1], new_sections
 
 
 if __name__ == '__main__':
