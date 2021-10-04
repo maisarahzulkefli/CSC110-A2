@@ -126,8 +126,8 @@ Do \textbf{not} include your solution in this file.
 
 
                 \begin{align*}
-                    IsValidSchedule(sc) : \forall x \in sc.sections, \forall y \in sc.sections : \neg SectionsConflict(x, y), & \\
-                    \text{where $sc \in SC \land x \neq y$}                                                                                            &
+                    IsValidSchedule(sc) : \forall x \in sc.sections, \forall y \in sc.sections, x \neq y \Rightarrow \neg SectionsConflict(x, y), & \\
+                    \text{where $sc \in SC$}                                                                                            &
                 \end{align*}
 
 
