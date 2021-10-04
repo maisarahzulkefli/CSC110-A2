@@ -152,8 +152,8 @@ def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, s
       - term in {'F', 'S'}
     """
 
-    same_sem_sections = set([course[2] for section in course[2] if section[1] in {term, 'Y'}])
-    return course[0], course[1], same_sem_sections
+    new_sections = {section for section in course[2] if section[1] in {'Y', term}}
+    return course[0], course[1], new_sections
 
 
 if __name__ == '__main__':
@@ -169,9 +169,9 @@ if __name__ == '__main__':
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # IMPORTANT: Leave this code uncommented when you submit your files.
-    python_ta.check_all(config={
-        'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
-        'max-line-length': 100,
-        'disable': ['R1705'],
-        'allowed-io': ['read_course_data']
-    })
+    # python_ta.check_all(config={
+    #     'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
+    #     'max-line-length': 100,
+    #     'disable': ['R1705'],
+    #     'allowed-io': ['read_course_data']
+    # })
