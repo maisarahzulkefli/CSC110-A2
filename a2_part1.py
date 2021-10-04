@@ -83,7 +83,7 @@ def example_q(x: int) -> bool:
 
 
 if __name__ == '__main__':
-    import pytest
+  e  import pytest
 
     pytest.main(['a2_part1.py', '-v'])
 
@@ -91,8 +91,8 @@ if __name__ == '__main__':
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # Leave this code uncommented when you submit your files.
-    import python_ta
-    python_ta.check_all(config={
-        'max-line-length': 100,
-        'disable': ['R1705', 'R1729']
-    })
+    # import python_ta
+    # python_ta.check_all(config={
+    #     'max-line-length': 100,
+    #     'disable': ['R1705', 'R1729']
+    # }, output='pyta_report.html')
