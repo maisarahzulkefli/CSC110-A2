@@ -279,7 +279,9 @@ def test_possible_five_course_schedules() -> None:
     c3 = CON123
     c4 = CON333
     c5 = MAT137
+
     expected = 8
+
     actual = a2_courses.possible_five_course_schedules(c1, c2, c3, c4, c5)
     assert len(actual) == expected
 
@@ -288,13 +290,6 @@ def test_invalid_five_course_schedules() -> None:
     """
     Test valid_five_course_schedules with invalid five course schedule
     """
-    schedule_6 = {
-        'CSC110': CSC110_LEC0101,
-        'MAT137': MAT137_LEC0101,
-        'CON123': CON123_LEC0123,
-        'CON333': CON333_LEC1337,
-        'CSC111': CSC111_LEC0301
-    }
 
     expected = []
     actual = a2_courses.valid_five_course_schedules(CSC110, MAT137, CON123, CON333, CSC111)
@@ -381,8 +376,6 @@ def test_transform_meeting_time_data() -> None:
     actual = a2_part4.transform_meeting_time_data(MON_9_TO_11_RAW)
     assert actual == expected
 
-
-# TODO: Create more tests
 
 if __name__ == "__main__":
     pytest.main(['a2_example_tests.py'])
