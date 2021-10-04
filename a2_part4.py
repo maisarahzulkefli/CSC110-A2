@@ -50,9 +50,6 @@ def read_course_data(file: str) -> dict:
     with open(file) as json_file:
         data = json.load(json_file)
 
-    # backup
-    # return data
-
     return {key: transform_course_data(data[key]) for key in data}
 
 
@@ -67,14 +64,8 @@ def transform_course_data(course_data: dict) -> tuple[str, str, set]:
     """
     course_code = course_data['courseCode']
     course_name = course_data['courseTitle']
-
-    # MON_9_TO_11 = ('Monday', datetime.time(9), datetime.time(11))
-    # CSC110_LEC0101 = ('LEC0101', 'F', (MON_9_TO_11, TUE_9_TO_11, WED_9_TO_11))
-    # CSC110 = ('CSC110', 'Foundations of Computer Science I', {CSC110_LEC0101})
-
     sections_available = set(transform_section_data(section) for section in course_data['sections'])
-
-    return (course_code, course_name, sections_available)
+    return course_code, course_name, sections_available
 
 
 def transform_section_data(section_data: dict) -> tuple[str, str, tuple]:
@@ -89,7 +80,7 @@ def transform_section_data(section_data: dict) -> tuple[str, str, tuple]:
     times_tuple = tuple([transform_meeting_time_data(meeting_time)
                          for meeting_time in section_data['meetingTimes']])
 
-    return (section_data['sectionCode'], section_data['term'], times_tuple)
+    return section_data['sectionCode'], section_data['term'], times_tuple
 
 
 def transform_meeting_time_data(meeting_time_data: dict) \
@@ -106,12 +97,12 @@ def transform_meeting_time_data(meeting_time_data: dict) \
     You'll need to do some string processing to extract the hours and minutes, and convert
     these to ints and then to a datetime.time. The str.split method is one approach.
     """
-    start_hr, start_min = str.split(meeting_time_data['startTime'], ':')
-    end_hr, end_min = str.split(meeting_time_data['endTime'], ':')
-
-    return (meeting_time_data['day'],
-            datetime.time(int(start_hr), int(start_min)),
-            datetime.time(int(end_hr), int(end_min)))
+    # I think this way is more efficient
+    start_time = datetime.time(hour=int(meeting_time_data['startTime'][0:2]),
+                               minute=int(meeting_time_data['startTime'][3:-1]))
+    end_time = datetime.time(hour=int(meeting_time_data['endTime'][0:2]),
+                             minute=int(meeting_time_data['endTime'][3:-1]))
+    return meeting_time_data['day'], start_time, end_time
 
 
 def get_valid_schedules(course_data: dict[str, tuple[str, str, set]],
@@ -138,17 +129,14 @@ def get_valid_schedules(course_data: dict[str, tuple[str, str, set]],
         2. You'll need to process each course to filter to keep only the sections
            that appear in the given term. See the function we've started for you below.
     """
-
-    c1, c2, c3, c4, c5 = [course_data[course] for course in courses]
-
-    possible_schedules = a2_part3.valid_five_course_schedules(c1, c2, c3, c4, c5)
-
-    return [schedule for schedule in possible_schedules
-            if filter_by_term(c1, term)
-            and filter_by_term(c2, term)
-            and filter_by_term(c3, term)
-            and filter_by_term(c4, term)
-            and filter_by_term(c5, term)]
+    valid_courses = [filter_by_term(course_data[code], term) for code in courses]
+    if any(len(course[2]) == 0 for course in valid_courses):
+        return []
+    return a2_part3.valid_five_course_schedules(valid_courses[0],
+                                                valid_courses[1],
+                                                valid_courses[2],
+                                                valid_courses[3],
+                                                valid_courses[4])
 
 
 def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, set]:
@@ -164,9 +152,8 @@ def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, s
       - term in {'F', 'S'}
     """
 
-    same_sem_sections = set([course[2] for section in course[2] if section[1] in [term, 'Y']])
-
-    return (course[0], course[1], same_sem_sections)
+    same_sem_sections = set([course[2] for section in course[2] if section[1] in {term, 'Y'}])
+    return course[0], course[1], same_sem_sections
 
 
 if __name__ == '__main__':
@@ -182,9 +169,9 @@ if __name__ == '__main__':
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # IMPORTANT: Leave this code uncommented when you submit your files.
-    # python_ta.check_all(config={
-    #     'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
-    #     'max-line-length': 100,
-    #     'disable': ['R1705'],
-    #     'allowed-io': ['read_course_data']
-    # })
+    python_ta.check_all(config={
+        'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
+        'max-line-length': 100,
+        'disable': ['R1705'],
+        'allowed-io': ['read_course_data']
+    })
