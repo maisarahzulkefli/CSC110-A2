@@ -97,11 +97,14 @@ def transform_meeting_time_data(meeting_time_data: dict) \
     You'll need to do some string processing to extract the hours and minutes, and convert
     these to ints and then to a datetime.time. The str.split method is one approach.
     """
-    # I think this way is more efficient
-    start_time = datetime.time(hour=int(meeting_time_data['startTime'][0:2]),
-                               minute=int(meeting_time_data['startTime'][3:-1]))
-    end_time = datetime.time(hour=int(meeting_time_data['endTime'][0:2]),
-                             minute=int(meeting_time_data['endTime'][3:-1]))
+
+    # Reverted back to old str.split method
+    start_hr, start_min = str.split(meeting_time_data['startTime'], ':')
+    end_hr, end_min = str.split(meeting_time_data['endTime'], ':')
+
+    start_time = datetime.time(hour=int(start_hr), minute=int(start_min))
+    end_time = datetime.time(hour=int(end_hr), minute=int(end_min))
+
     return meeting_time_data['day'], start_time, end_time
 
 
@@ -129,14 +132,12 @@ def get_valid_schedules(course_data: dict[str, tuple[str, str, set]],
         2. You'll need to process each course to filter to keep only the sections
            that appear in the given term. See the function we've started for you below.
     """
-    valid_courses = [filter_by_term(course_data[code], term) for code in courses]
-    if any(len(course[2]) == 0 for course in valid_courses):
-        return []
-    return a2_part3.valid_five_course_schedules(valid_courses[0],
-                                                valid_courses[1],
-                                                valid_courses[2],
-                                                valid_courses[3],
-                                                valid_courses[4])
+
+    c1, c2, c3, c4, c5 = [filter_by_term(course_data[course], term) for course in courses]
+
+    possible_schedules = a2_part3.valid_five_course_schedules(c1, c2, c3, c4, c5)
+
+    return possible_schedules
 
 
 def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, set]:
@@ -152,7 +153,7 @@ def filter_by_term(course: tuple[str, str, set], term: str) -> tuple[str, str, s
       - term in {'F', 'S'}
     """
 
-    same_sem_sections = set([course[2] for section in course[2] if section[1] in {term, 'Y'}])
+    same_sem_sections = set([section for section in course[2] if section[1] in {term, 'Y'}])
     return course[0], course[1], same_sem_sections
 
 
@@ -169,9 +170,9 @@ if __name__ == '__main__':
     # (Delete the "#" and space before each line.)
     # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # IMPORTANT: Leave this code uncommented when you submit your files.
-    python_ta.check_all(config={
-        'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
-        'max-line-length': 100,
-        'disable': ['R1705'],
-        'allowed-io': ['read_course_data']
-    })
+    # python_ta.check_all(config={
+    #     'extra-imports': ['a2_part3', 'datetime', 'json', 'python_ta.contracts'],
+    #     'max-line-length': 100,
+    #     'disable': ['R1705'],
+    #     'allowed-io': ['read_course_data']
+    # }, output='pyta-report.html')
