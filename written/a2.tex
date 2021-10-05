@@ -23,15 +23,19 @@
 
     \item[2.]
         \begin{enumerate}
-            \item[1.] $P(x): |x| >= 10$
-            \item[2.] $Q(x): |x| >= 5$
+            \item[1.] $P(x): x \ge 6$
+            \item[2.] $Q(x): x \ge 5$
         \end{enumerate}
-        For Statement 3, $\forall x \in S$, condition P is always not satisfied and condition Q will only sometimes be satisfied. Which makes it false.
+            For all x in S, Statement 3 is False because when $x < 5$, $Q(x)$ is False.
 
-        However, for Statement 4, $\forall x \in S$, condition P will still not be satisfied always, but since this is an implication statement, if the hypothesis is false, then the whole implication statement will be true regardless of what $Q(x)$ is .
+            For all x in S, Statement 4 is True because the $P(x)$ covers $Q(x)$
+            (when $P(x)$ is True, $Q(x)$ is always True.)
+            , so whenever $P(x)$ is True or False, the entire conditional statement is True.
 
-        Therefore, in the two predicates I've listed, one of the statements will be true and the other will be false.
-
+            Also, $P(x)$ and $Q(x)$ is not independent from $S$.
+            
+            Therefore, we found a $P(x)$ and $Q(x)$ that will make one of the statements False
+            and the other statement True.
     \item[3.]
         Complete this part in the provided \texttt{a2\_part1.py} starter file.
         Do \textbf{not} include your solution in this file.

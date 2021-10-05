@@ -72,14 +72,14 @@ def example_p(x: int) -> bool:
     """An example predicate for "my_p" that can be used in test_statements_different.
     This p(x) returns True if the absolute value of x is greater than or equal to 10
     """
-    return abs(x) >= 10
+    return x >= 6
 
 
 def example_q(x: int) -> bool:
     """An example predicate for "my_q" that can be used in test_statements_different.
     This q(x) returns True if the absolute value of x is greater than or equal to 15
     """
-    return abs(x) >= 5
+    return x >= 5
 
 
 if __name__ == '__main__':
