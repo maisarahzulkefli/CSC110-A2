@@ -42,7 +42,7 @@ def mystery_1a_flat(x: int, y: set[int]) -> str:
 
 def mystery_1b_flat(n: int, rows_of_nums: list[list[int]]) -> int:
     """Return the same value as mystery_1b_nested, but using just a single if statement."""
-    if len(rows_of_nums) > n > 0 and n == 1:
+    if len(rows_of_nums) > 1 and n == 1:
         return 0
     elif len(rows_of_nums) > n > 0 and n in rows_of_nums[n]:
         return sum(rows_of_nums[n]) + n
