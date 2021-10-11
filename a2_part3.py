@@ -58,7 +58,7 @@ def sections_in_semester(schedule: dict[str, tuple[str, str, tuple]], semester: 
         - The input matches the format for a schedule described by the assignment handout.
         - semester in {'F', 'S'}
     """
-    return {schedule[course] for course in schedule if schedule[course][1] in [semester, 'Y']}
+    return {schedule[course] for course in schedule if schedule[course][1] in {semester, 'Y'}}
 
 
 ###################################################################################################
