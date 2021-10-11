@@ -18,7 +18,7 @@
         \begin{enumerate}
             \item[1.] If $D_1$ is the set of all Natural Numbers, then it's possible to only satisfy one statement. In this case, statement 1 will be satisfied, but statement 2 will not. Because for every number you pick in the Natural Numbers set, you can always find a number that is greater than it just by adding 1. But for the number 1 (or 0 depending on how you start the Natural Numbers), you cannot find a number that is smaller than it (Statement 2).
             \item[2.] If $D_2$ is the set of all Integers, including negatives, then it's possible to satisfy both. In this case, statement 1 will be satisfied because you can always find a number (y) greater than any number (x) you pick from the set. You can also always find a number (x) that is smaller than any number (y) you pick from the set.
-            \item[3.] If $D_3$ is a set with only 1 element, then it's possible to falsify both statements. Pick $D_3 = {1}$, then for statement 1 and 2, we cannot find a y or x that is greater than or lesser than it. So both statements automatically becomes false.
+            \item[3.] If $D_3$ is a set with only 1 element, then it's possible to falsify both statements. Pick $D_3 = \{1\}$, then for statement 1 and 2, we cannot find a y or x that is greater than or lesser than it. So both statements become false.
         \end{enumerate}
 
     \item[2.]
@@ -26,15 +26,15 @@
             \item[1.] $P(x): x \ge 6$
             \item[2.] $Q(x): x \ge 5$
         \end{enumerate}
-            For all x in S, Statement 3 is False because when $x < 5$, $Q(x)$ is False.
+            Statement 3 is False because when $x < 5$, $Q(x)$ is False.
 
-            For all x in S, Statement 4 is True because the $P(x)$ covers $Q(x)$
-            (when $P(x)$ is True, $Q(x)$ is always True.)
+            Statement 4 is True because the $P(x)$ covers $Q(x)$
+            (When $P(x)$ is True, $Q(x)$ is always True, and when $P(x)$ is False, the conditional is True)
             , so whenever $P(x)$ is True or False, the entire conditional statement is True.
 
-            Also, $P(x)$ and $Q(x)$ is not independent from $S$.
+            Also, $P(x)$ and $Q(x)$ are not independent from $S$.
             
-            Therefore, we found a $P(x)$ and $Q(x)$ that will make one of the statements False
+            Therefore, we found a $P(x)$ and a $Q(x)$ that make one of the statements False
             and the other statement True.
     \item[3.]
         Complete this part in the provided \texttt{a2\_part1.py} starter file.
@@ -154,7 +154,7 @@ Do \textbf{not} include your solution in this file.
 
 
                 \begin{align*}
-                    IsCompatibleSection(sc, s) : \forall x \in sc.sections, \neg SectionsConflict(x, s) & \\
+                    IsCompatibleSection(sc, s) : \forall x \in sc.sections, \neg SectionsConflict(x, s)
                     \text{where $sc \in SC, s \in S$}
                 \end{align*}
 
