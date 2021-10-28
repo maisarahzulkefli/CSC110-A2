@@ -105,7 +105,7 @@ def is_valid(schedule: dict[str, tuple[str, str, tuple]]) -> bool:
     """
     # Gives all the values of the dictionary
     sc_sections = [schedule[key] for key in schedule]
-    return all([not sections_conflict(x, y) for x in sc_sections for y in sc_sections if x != y])
+    return all([not sections_conflict(x, y) for x in sc_sections for y in sc_sections if x is not y])
 
 
 def possible_schedules(c1: tuple[str, str, set], c2: tuple[str, str, set]) \
